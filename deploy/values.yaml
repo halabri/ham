@@ -1,0 +1,4 @@
+host: "ham.weiham.com"
+
+web:
+  tag: "changeme"
