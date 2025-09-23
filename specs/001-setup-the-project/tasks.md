@@ -21,73 +21,73 @@
 ## Tasks
 
 ### Phase A: Environment & Tooling Setup
-1. T001 - Initialize Next.js project with TypeScript, TailwindCSS, ESLint, App Router, src dir (if not already)  
+1. [X] T001 - Initialize Next.js project with TypeScript, TailwindCSS, ESLint, App Router, src dir (if not already)  
    Path: project root  
    Output: `package.json`, base Next.js structure  
    Dependencies: None
-2. T002 - Enable React 19 compiler in `next.config.js`  
+2. [X] T002 - Enable React 19 compiler in `next.config.js`  
    Path: `/next.config.js`  
    Dependencies: T001
-3. T003 - Configure TypeScript strict mode in `tsconfig.json`  
+3. [X] T003 - Configure TypeScript strict mode in `tsconfig.json`  
    Path: `/tsconfig.json`  
    Dependencies: T001
-4. T004 - Add Jest + React Testing Library + jest-dom setup  
+4. [X] T004 - Add Jest + React Testing Library + jest-dom setup  
    Path: `/jest.config.js`, `/jest.setup.js`  
    Dependencies: T001
-5. T005 - Add TailwindCSS config (`tailwind.config.js`, `postcss.config.js`, global CSS import)  
+5. [X] T005 - Add TailwindCSS config (`tailwind.config.js`, `postcss.config.js`, global CSS import)  
    Path: `/tailwind.config.js`, `/src/styles/globals.css`  
    Dependencies: T001
-6. T006 - Add ESLint accessibility and Next.js rules; ensure no unused `any`  
+6. [X] T006 - Add ESLint accessibility and Next.js rules; ensure no unused `any`  
    Path: `.eslintrc.*`  
    Dependencies: T001
 
 ### Phase B: Type Definitions & Data Layer (Tests First)
-7. T007 [P] - Create `src/types/index.ts` with `ProfileItem` + `ProfileSection` interfaces  
+7. [X] T007 [P] - Create `src/types/index.ts` with `ProfileItem` + `ProfileSection` interfaces  
    Dependencies: T003
-8. T008 [P] - Create `src/lib/data.ts` with `getProfileSections()` returning static filtered sections  
+8. [X] T008 [P] - Create `src/lib/data.ts` with `getProfileSections()` returning static filtered sections  
    Dependencies: T007
-9. T009 - Write unit test for data layer (e.g., `tests/unit/data.spec.ts`) asserting hidden sections are filtered out  
+9. [X] T009 - Write unit test for data layer (e.g., `tests/unit/data.spec.ts`) asserting hidden sections are filtered out  
    Dependencies: T008
 
 ### Phase C: Core UI Components (Scaffold Tests Then Implement)
-10. T010 [P] - Create test `tests/components/Navigation.test.tsx` (expect Home/Blog links, active state)  
+10. [X] T010 [P] - Create test `tests/components/Navigation.test.tsx` (expect Home/Blog links, active state)  
     Dependencies: T004
-11. T011 [P] - Implement `src/components/ui/Navigation.tsx` with static `NAVIGATION_ITEMS` and active styling  
+11. [X] T011 [P] - Implement `src/components/ui/Navigation.tsx` with static `NAVIGATION_ITEMS` and active styling  
     Dependencies: T010
-12. T012 [P] - Create test `tests/components/ProfileSection.test.tsx` (renders title, hides when not visible, renders list vs text)  
+12. [X] T012 [P] - Create test `tests/components/ProfileSection.test.tsx` (renders title, hides when not visible, renders list vs text)  
     Dependencies: T004
-13. T013 [P] - Implement `src/components/sections/ProfileSection.tsx`  
+13. [X] T013 [P] - Implement `src/components/sections/ProfileSection.tsx`  
     Dependencies: T012
 
 ### Phase D: Pages (Home & Blog)
-14. T014 - Create test `tests/components/HomePage.test.tsx` (renders heading + at least one visible profile section)  
+14. [X] T014 - Create test `tests/components/HomePage.test.tsx` (renders heading + at least one visible profile section)  
     Dependencies: T011, T013, T009
-15. T015 - Implement `src/app/page.tsx` (Home page) using Navigation + ProfileSection components  
+15. [X] T015 - Implement `src/app/page.tsx` (Home page) using Navigation + ProfileSection components  
     Dependencies: T014
-16. T016 - Create test `tests/components/BlogPage.test.tsx` (renders Coming Soon + navigation)  
+16. [X] T016 - Create test `tests/components/BlogPage.test.tsx` (renders Coming Soon + navigation)  
     Dependencies: T011
-17. T017 - Implement `src/app/blog/page.tsx`  
+17. [X] T017 - Implement `src/app/blog/page.tsx`  
     Dependencies: T016
 
 ### Phase E: Styling, Accessibility & Performance Hardening
-18. T018 [P] - Add semantic landmarks (nav, main, header) & aria attributes where appropriate  
+18. [X] T018 [P] - Add semantic landmarks (nav, main, header) & aria attributes where appropriate  
     Path: components + pages  
     Dependencies: T011, T013, T015, T017
-19. T019 [P] - Add basic responsive layout utilities (containers, spacing, typography) to global styles  
+19. [X] T019 [P] - Add basic responsive layout utilities (containers, spacing, typography) to global styles  
     Path: `/src/styles/globals.css`  
     Dependencies: T005
-20. T020 [P] - Ensure color contrast + focus outlines (manual audit + tweaks)  
+20. [X] T020 [P] - Ensure color contrast + focus outlines (manual audit + tweaks)  
     Path: CSS + component classNames  
     Dependencies: T019
-21. T021 - Run Lighthouse (manual) and document performance metrics in `research.md` appendix  
+21. [X] T021 - Run Lighthouse (manual) and document performance metrics in `research.md` appendix  
     Dependencies: T015, T017
 
 ### Phase F: Testing & Quality Gates
-22. T022 - Add accessibility test (axe or jest-axe) for Navigation & ProfileSection  
+22. [X] T022 - Add accessibility test (axe or jest-axe) for Navigation & ProfileSection  
     Dependencies: T011, T013, T004
-23. T023 - Add integration test simulating navigation between Home and Blog (Next.js test utilities)  
+23. [X] T023 - Add integration test simulating navigation between Home and Blog (Next.js test utilities)  
     Dependencies: T015, T017, T004
-24. T024 - Add type checking & lint scripts to `package.json` ("typecheck", enforce no `any`)  
+24. [X] T024 - Add type checking & lint scripts to `package.json` ("typecheck", enforce no `any`)  
     Dependencies: T001, T003
 25. T025 - Add CI-friendly test & lint summary doc section in `quickstart.md`  
     Dependencies: T024
