@@ -47,7 +47,13 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+**I. Component-First Architecture**: ✅ Feature decomposed into reusable components with clear interfaces
+**II. Performance-First Development**: ✅ Performance impact assessed (bundle size, Web Core Vitals considered)
+**III. Responsive Design**: ✅ Mobile-first approach planned for all breakpoints (320px-4K)
+**IV. Type Safety & Code Quality**: ✅ TypeScript interfaces defined, no `any` types planned
+**V. SEO & Accessibility**: ✅ Semantic HTML, meta tags, and WCAG 2.1 AA compliance planned
+
+*Violations require explicit justification in Complexity Tracking section*
 
 ## Project Structure
 
@@ -76,7 +82,22 @@ tests/
 ├── integration/
 └── unit/
 
-# Option 2: Web application (when "frontend" + "backend" detected)
+# Option 2: Next.js Portfolio Site (when React/Next.js detected)
+src/
+├── app/                 # Next.js App Router pages
+├── components/          # Reusable React components
+│   ├── ui/             # Basic UI components
+│   └── sections/       # Page section components
+├── lib/                # Utility functions and configurations
+├── types/              # TypeScript type definitions
+└── styles/             # Global styles and Tailwind config
+
+public/                 # Static assets (images, icons, etc.)
+tests/
+├── components/         # Component unit tests
+└── e2e/               # End-to-end tests
+
+# Option 3: Web application (when "frontend" + "backend" detected)
 backend/
 ├── src/
 │   ├── models/
@@ -91,7 +112,7 @@ frontend/
 │   └── services/
 └── tests/
 
-# Option 3: Mobile + API (when "iOS/Android" detected)
+# Option 4: Mobile + API (when "iOS/Android" detected)
 api/
 └── [same as backend above]
 
@@ -99,7 +120,7 @@ ios/ or android/
 └── [platform-specific structure]
 ```
 
-**Structure Decision**: [DEFAULT to Option 1 unless Technical Context indicates web/mobile app]
+**Structure Decision**: [Option 2 for React/Next.js portfolio, Option 1 for other single projects, unless Technical Context indicates web/mobile app]
 
 ## Phase 0: Outline & Research
 1. **Extract unknowns from Technical Context** above:
@@ -209,4 +230,4 @@ ios/ or android/
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v1.0.0 - See `/memory/constitution.md`*
