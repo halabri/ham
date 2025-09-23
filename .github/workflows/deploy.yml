@@ -41,9 +41,9 @@ jobs:
           HELM_DRIVER: configmap
         run: |
           set -euo pipefail
-          helm upgrade --install ham do/deploy \
+          helm upgrade --install ham deploy \
             -n ham \
-            -f do/deploy/values.yaml \
+            -f deploy/values.yaml \
             --set backend.tag="${{ inputs.tag }}" \
             --set web.tag="${{ inputs.tag }}" \
             --atomic --timeout 10m
