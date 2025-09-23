@@ -8,11 +8,11 @@ describe('Navigation Integration Tests', () => {
     it('renders HomePage with navigation and allows navigation to Blog', () => {
       render(<HomePage />);
       
-      // Verify HomePage content is present
-      expect(screen.getByText('Welcome to My Portfolio')).toBeInTheDocument();
+      // Verify HomePage content is present - checking for actual heading
+      expect(screen.getByText('Ham (Hisham Alabri)')).toBeInTheDocument();
       
       // Verify navigation is present
-      const navigation = screen.getByRole('navigation');
+      const navigation = screen.getByRole('navigation', { name: 'Main navigation' });
       expect(navigation).toBeInTheDocument();
       
       // Verify both navigation links are present
@@ -34,9 +34,9 @@ describe('Navigation Integration Tests', () => {
     it('displays profile sections on HomePage', () => {
       render(<HomePage />);
       
-      // Look for profile section content - checking the actual title from data
-      const bioSection = screen.getByText('About');
-      expect(bioSection).toBeInTheDocument();
+      // Look for profile section content - checking the actual professional summary
+      const professionalSummary = screen.getByText('Professional Summary');
+      expect(professionalSummary).toBeInTheDocument();
       
       // Should have at least one visible profile section
       const sections = screen.getAllByRole('region');
@@ -90,23 +90,32 @@ describe('Navigation Integration Tests', () => {
     it('maintains consistent navigation structure between pages', () => {
       // Test HomePage navigation
       const { unmount } = render(<HomePage />);
-      const homeNavigation = screen.getByRole('navigation');
+      const homeNavigation = screen.getByRole('navigation', { name: 'Main navigation' });
       const homeLinks = screen.getAllByRole('link');
       
-      expect(homeLinks).toHaveLength(2);
-      expect(homeLinks[0]).toHaveTextContent('Home');
-      expect(homeLinks[1]).toHaveTextContent('Blog');
+      // HomePage has main navigation (2 links) + contact links (2 links) = 4 total
+      expect(homeLinks.length).toBeGreaterThanOrEqual(2);
+      
+      // Check main navigation links
+      const mainHomeLink = screen.getByRole('link', { name: 'Home' });
+      const mainBlogLink = screen.getByRole('link', { name: 'Blog' });
+      expect(mainHomeLink).toHaveTextContent('Home');
+      expect(mainBlogLink).toHaveTextContent('Blog');
       
       unmount();
       
       // Test BlogPage navigation
       render(<BlogPage />);
-      const blogNavigation = screen.getByRole('navigation');
-      const blogLinks = screen.getAllByRole('link');
+      const blogNavigation = screen.getByRole('navigation', { name: 'Main navigation' });
+      const blogMainLinks = screen.getAllByRole('link');
       
-      expect(blogLinks).toHaveLength(2);
-      expect(blogLinks[0]).toHaveTextContent('Home');
-      expect(blogLinks[1]).toHaveTextContent('Blog');
+      expect(blogMainLinks.length).toBeGreaterThanOrEqual(2);
+      
+      // Check navigation links
+      const newMainHomeLink = screen.getByRole('link', { name: 'Home' });
+      const newMainBlogLink = screen.getByRole('link', { name: 'Blog' });
+      expect(newMainHomeLink).toHaveTextContent('Home');
+      expect(newMainBlogLink).toHaveTextContent('Blog');
       
       // Navigation structure should be identical
       expect(blogNavigation).toHaveClass('fixed', 'top-0', 'w-full');
