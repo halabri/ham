@@ -1,8 +1,8 @@
 <!--
 Sync Impact Report - Constitution Update
-Version change: 1.1.0 → 1.2.0
-Modified principles: Updated Technology Standards to mandate PostgreSQL database and Prisma ORM
-Added sections: Database and ORM requirements in Core Stack Requirements
+Version change: 1.2.0 → 1.2.1
+Modified principles: Updated Technology Standards to mandate Prisma database migrations from initial release
+Added sections: Database migration requirements in Core Stack Requirements
 Removed sections: None
 Templates requiring updates: ✅ plan-template.md (validated), ✅ spec-template.md (validated), ✅ tasks-template.md (validated)
 Follow-up TODOs: None
@@ -44,6 +44,7 @@ All pages must have proper meta tags, structured data, and semantic HTML. WCAG 2
 - **React Compiler**: React 19 compiler MUST be enabled in Next.js configuration for automatic optimization
 - **Database**: PostgreSQL (latest stable version) for all persistent data storage
 - **ORM**: Prisma MUST be used for all database interactions with type-safe query generation
+- **Database Migrations**: Prisma migrations MUST be used for all database schema changes from initial release
 - **Styling**: TailwindCSS with custom design system configuration
 - **TypeScript**: Strict mode enabled, latest stable version
 - **Package Manager**: npm or yarn, lockfile committed
@@ -80,4 +81,4 @@ Amendment procedure: Proposals require documentation of impact on existing code,
 
 Use project README.md and component documentation for runtime development guidance and specific implementation patterns.
 
-**Version**: 1.2.0 | **Ratified**: 2025-09-23 | **Last Amended**: 2025-09-23
+**Version**: 1.2.1 | **Ratified**: 2025-09-23 | **Last Amended**: 2025-09-23
