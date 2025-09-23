@@ -1,8 +1,8 @@
 <!--
 Sync Impact Report - Constitution Update
-Version change: New → 1.0.0
-Modified principles: Initial creation for React 19/Next.js/TailwindCSS portfolio site
-Added sections: All sections (initial creation)
+Version change: 1.0.0 → 1.1.0
+Modified principles: Updated Technology Standards to mandate React 19 compiler usage
+Added sections: React 19 compiler requirement in Core Stack Requirements
 Removed sections: None
 Templates requiring updates: ✅ plan-template.md (validated), ✅ spec-template.md (validated), ✅ tasks-template.md (validated)
 Follow-up TODOs: None
@@ -23,7 +23,7 @@ All components and pages MUST meet Web Core Vitals standards: LCP < 2.5s, FID < 
 **Rationale**: Portfolio sites are judged heavily on performance. Poor performance directly impacts user experience and professional credibility.
 
 ### III. Responsive Design (NON-NEGOTIABLE)
-Mobile-first design approach mandatory. All components must work seamlessly from 320px to 4K displays. TailwindCSS breakpoints must be consistently applied: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px).
+Mobile-first design approach is mandatory. All components must work seamlessly from 320px to 4K displays. TailwindCSS breakpoints must be consistently applied: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px).
 
 **Rationale**: Modern web usage is mobile-dominant. A portfolio that doesn't work on mobile devices fails its primary purpose.
 
@@ -40,11 +40,12 @@ All pages must have proper meta tags, structured data, and semantic HTML. WCAG 2
 ## Technology Standards
 
 ### Core Stack Requirements
-- **Framework**: Next.js 15+ with App Router (React 19+ features encouraged)
+- **Framework**: Next.js 15+ with App Router and React 19 compiler enabled (React 19+ features encouraged)
+- **React Compiler**: React 19 compiler MUST be enabled in Next.js configuration for automatic optimization
 - **Styling**: TailwindCSS with custom design system configuration
 - **TypeScript**: Strict mode enabled, latest stable version
 - **Package Manager**: npm or yarn, lockfile committed
-- **Deployment**: Self hosted in a kubernetes cluster
+- **Deployment**: Self-hosted in a kubernetes cluster
 
 ### Development Tooling
 - **Linting**: ESLint with Next.js and accessibility rules
@@ -77,4 +78,4 @@ Amendment procedure: Proposals require documentation of impact on existing code,
 
 Use project README.md and component documentation for runtime development guidance and specific implementation patterns.
 
-**Version**: 1.0.0 | **Ratified**: 2025-09-23 | **Last Amended**: 2025-09-23
+**Version**: 1.1.0 | **Ratified**: 2025-09-23 | **Last Amended**: 2025-09-23
