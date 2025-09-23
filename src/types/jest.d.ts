@@ -4,6 +4,9 @@ declare global {
     interface Matchers<R> {
       toBeAccessible(): R;
       toRespectReducedMotion(): R;
+      toHaveAccessibleName(): R;
+      toHaveKeyboardSupport(): R;
+      toMeetContrastRequirements(): R;
     }
   }
 }

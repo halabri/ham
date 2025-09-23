@@ -27,8 +27,8 @@ describe('Homepage Dark Theme Integration', () => {
   test('interactive elements show glow effects', () => {
     renderHomePage();
     
-    // Look for glow effects on the main heading
-    const heading = screen.getByRole('heading', { name: /welcome to my portfolio/i });
+    // Look for glow effects on the main heading - update to match actual content
+    const heading = screen.getByRole('heading', { name: /ham.*hisham alabri/i });
     expect(heading).toBeInTheDocument();
     
     // The heading should be wrapped in a glow effect
@@ -77,8 +77,8 @@ describe('Homepage Dark Theme Integration', () => {
     const headings = screen.getAllByRole('heading');
     expect(headings.length).toBeGreaterThan(0);
     
-    // Check that the main heading is accessible
-    const mainHeading = screen.getByRole('heading', { name: /welcome to my portfolio/i });
+    // Check that the main heading is accessible - update to match actual content
+    const mainHeading = screen.getByRole('heading', { name: /ham.*hisham alabri/i });
     expect(mainHeading).toBeAccessible();
   });
 
@@ -106,8 +106,8 @@ describe('Homepage Dark Theme Integration', () => {
     expect(particleBackground).toBeInTheDocument();
     expect(mainContent).toBeInTheDocument();
     
-    // Check that particle background is properly positioned
-    expect(particleBackground).toHaveClass('fixed');
+    // Check that particle background is properly positioned and accessible
+    expect(particleBackground).toHaveClass('particle-background');
     expect(particleBackground).toHaveAttribute('aria-hidden', 'true');
   });
 

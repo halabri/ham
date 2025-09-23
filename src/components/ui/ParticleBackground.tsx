@@ -1,7 +1,22 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ParticleBackgroundProps, PARTICLE_DENSITY_CONFIG } from '@/types/components';
+
+// Seeded random number generator for consistent particles
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+interface Particle {
+  id: number;
+  size: number;
+  left: number;
+  top: number;
+  animationDelay: number;
+  isSparkle: boolean;
+}
 
 export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
   density = 'medium',
@@ -12,10 +27,17 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
 }) => {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [isClient, setIsClient] = useState(false);
+
+  // Set client-side flag after hydration
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Check for reduced motion preference
   useEffect(() => {
-    if (!respectReducedMotion) return;
+    if (!respectReducedMotion || !isClient) return;
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mediaQuery.matches);
@@ -26,10 +48,12 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
 
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [respectReducedMotion]);
+  }, [respectReducedMotion, isClient]);
 
   // Check for mobile device
   useEffect(() => {
+    if (!isClient) return;
+
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -37,10 +61,12 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [isClient]);
 
-  // Generate particles based on configuration
-  const particles = useMemo(() => {
+  // Generate particles after hydration with seeded randomness
+  useEffect(() => {
+    if (!isClient) return;
+
     const config = PARTICLE_DENSITY_CONFIG[density];
     let particleCount = config.count;
 
@@ -49,20 +75,23 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
       particleCount = Math.floor(particleCount * 0.6);
     }
 
-    return Array.from({ length: particleCount }, (_, index) => {
-      const size = Math.random() * config.maxSize + 1;
-      const isSparkle = Math.random() < config.sparkleFrequency;
+    const newParticles = Array.from({ length: particleCount }, (_, index) => {
+      const seed = index * 1000; // Use index as seed for consistency
+      const size = seededRandom(seed + 1) * config.maxSize + 1;
+      const isSparkle = seededRandom(seed + 2) < config.sparkleFrequency;
       
       return {
         id: index,
         size,
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        animationDelay: Math.random() * config.animationDuration,
+        left: seededRandom(seed + 3) * 100,
+        top: seededRandom(seed + 4) * 100,
+        animationDelay: seededRandom(seed + 5) * config.animationDuration,
         isSparkle,
       };
     });
-  }, [density, isMobile]);
+
+    setParticles(newParticles);
+  }, [density, isMobile, isClient]);
 
   const containerClasses = [
     'particle-background',
@@ -73,6 +102,18 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
     'gpu-accelerated',
     className,
   ].filter(Boolean).join(' ');
+
+  // Don't render particles until client-side hydration is complete
+  if (!isClient) {
+    return (
+      <div
+        className={containerClasses}
+        role="presentation"
+        aria-hidden="true"
+        {...props}
+      />
+    );
+  }
 
   return (
     <div

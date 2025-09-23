@@ -53,7 +53,7 @@ export const DarkThemeProvider: React.FC<DarkThemeProviderProps> = ({
   // Detect system theme preference
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
+    const handleChange = () => {
       // For this feature, we always use dark mode, but we could respect system preference
       // setIsDarkMode(e.matches);
     };

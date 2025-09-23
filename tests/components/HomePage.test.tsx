@@ -2,17 +2,17 @@ import { render, screen } from '@testing-library/react';
 import HomePage from '@/app/page';
 
 describe('HomePage', () => {
-  it('renders the main welcome heading', () => {
+  it('renders the main profile heading', () => {
     render(<HomePage />);
     
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toHaveTextContent('Welcome to My Portfolio');
+    expect(heading).toHaveTextContent('Ham (Hisham Alabri)');
   });
 
   it('renders navigation component', () => {
     render(<HomePage />);
     
-    const nav = screen.getByRole('navigation');
+    const nav = screen.getByRole('navigation', { name: 'Main navigation' });
     expect(nav).toBeInTheDocument();
     
     // Check navigation items
@@ -20,11 +20,11 @@ describe('HomePage', () => {
     expect(screen.getByText('Blog')).toBeInTheDocument();
   });
 
-  it('renders at least one profile section', () => {
+  it('renders professional summary section', () => {
     render(<HomePage />);
     
-    // Should render the bio section which is visible by default
-    expect(screen.getByText('About')).toBeInTheDocument();
+    // Should render the professional summary section
+    expect(screen.getByText('Professional Summary')).toBeInTheDocument();
   });
 
   it('has proper semantic structure', () => {
@@ -35,7 +35,7 @@ describe('HomePage', () => {
     expect(main).toBeInTheDocument();
     
     // Should have navigation landmark
-    const nav = screen.getByRole('navigation');
+    const nav = screen.getByRole('navigation', { name: 'Main navigation' });
     expect(nav).toBeInTheDocument();
   });
 
