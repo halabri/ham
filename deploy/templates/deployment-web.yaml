@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ham.fullname" . }}-web
+  labels:
+    app.kubernetes.io/name: ham-web
+    app.kubernetes.io/part-of: ham
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ham-web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ham-web
+    spec:
+      containers:
+        - name: web
+          image: "ghcr.io/halabri/ham:{{ .Values.web.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
