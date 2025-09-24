@@ -70,7 +70,7 @@ export const workExperience: WorkExperience[] = [
       {
         name: "Digital Front Door",
         description: "Patient portal and healthcare management platform.",
-        impact: "Deployed across SLHD, Alfred Health, Peninsula Health, NZ Health).",
+        impact: "Deployed across RFDS, SLHD, Alfred Health, Peninsula Health, NZ Health, King's College Hospital Dubai.",
       },
       {
         name: "Florence",

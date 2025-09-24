@@ -3,8 +3,8 @@ import { DarkThemeProvider } from '@/components/ui';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'Personal portfolio website showcasing skills and experience.',
+  title: 'Ham',
+  description: 'Portfolio and Blog.',
 };
 
 export default function RootLayout({
