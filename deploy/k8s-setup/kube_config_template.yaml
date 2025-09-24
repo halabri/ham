@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Config
+
+clusters:
+- name: k3s
+  cluster:
+    server: https://test.spexity.net:6443
+    certificate-authority-data: #sh kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}'
+
+users:
+- name: ham-gh-deployer
+  user:
+    token: #sh kubectl -n spexity-cicd get secret gh-deployer-token -o jsonpath='{.data.token}' | base64 -d
+
+contexts:
+- name: ci
+  context:
+    cluster: k3s
+    user: ham-gh-deployer
+
+current-context: ci
