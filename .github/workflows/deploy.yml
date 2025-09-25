@@ -44,7 +44,6 @@ jobs:
           helm upgrade --install ham deploy \
             -n ham \
             -f deploy/values.yaml \
-            --set backend.tag="${{ inputs.tag }}" \
             --set web.tag="${{ inputs.tag }}" \
             --atomic --timeout 10m
       - name: Post-deploy status
