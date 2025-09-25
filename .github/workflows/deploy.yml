@@ -1,4 +1,4 @@
-name: Deploy to ham.weiham.com
+name: Deploy to ham.alabri.au
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://ham.weiham.com
+      url: https://ham.alabri.au
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
